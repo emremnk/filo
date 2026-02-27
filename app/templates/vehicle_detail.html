@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ vehicle.plate }} Detayı</h2>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <form method="post" action="{{ url_for('main.vehicle_update', vehicle_id=vehicle.id) }}">
+      <input class="form-control mb-2" name="plate" value="{{ vehicle.plate }}" required>
+      <label>Vize Tarihi</label><input type="date" class="form-control mb-2" name="inspection_date" value="{{ vehicle.inspection_date or '' }}">
+      <label>Sigorta Tarihi</label><input type="date" class="form-control mb-2" name="insurance_date" value="{{ vehicle.insurance_date or '' }}">
+      <label>Muayene Tarihi</label><input type="date" class="form-control mb-2" name="exam_date" value="{{ vehicle.exam_date or '' }}">
+      <button class="btn btn-success">Güncelle</button>
+    </form>
+    <form method="post" action="{{ url_for('main.vehicle_delete', vehicle_id=vehicle.id) }}" class="mt-2">
+      <button class="btn btn-danger">Sil</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-header">Şoför Ekle</div>
+      <div class="card-body">
+        <form method="post">
+          <input class="form-control mb-2" name="name" list="driver-defaults" placeholder="Şoför adı" required>
+          <datalist id="driver-defaults">
+            <option value="Şoför yok"></option>
+            <option value="Ali"></option>
+            <option value="Veli"></option>
+          </datalist>
+          <button class="btn btn-primary w-100">Kaydet</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-header">Şoför Listesi</div>
+      <div class="list-group list-group-flush">
+        {% for driver in drivers %}
+        <a class="list-group-item list-group-item-action" href="{{ url_for('main.driver_detail', driver_id=driver.id) }}">{{ driver.name }}</a>
+        {% else %}
+        <div class="list-group-item">Şoför bulunamadı.</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

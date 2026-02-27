@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card shadow-sm"><div class="card-header">Birim Ekle</div><div class="card-body">
+      <form method="post">
+        <input class="form-control mb-2" name="name" list="unit-defaults" placeholder="Birim adı" required>
+        <datalist id="unit-defaults">
+          <option value="Kiralık"></option>
+          <option value="X Firma"></option>
+          <option value="Y Firma"></option>
+        </datalist>
+        <button class="btn btn-primary w-100">Kaydet</button>
+      </form>
+    </div></div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card shadow-sm"><div class="card-header">Birim Listesi</div>
+      <div class="list-group list-group-flush">
+        {% for unit in units %}
+          <a class="list-group-item list-group-item-action" href="{{ url_for('main.unit_detail', unit_id=unit.id) }}">{{ unit.name }}</a>
+        {% else %}
+          <div class="list-group-item">Birim bulunamadı.</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
