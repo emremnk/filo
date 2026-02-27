@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ driver.name }} - İşe Gelmediği Günler</h2>
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card shadow-sm"><div class="card-body">
+      <form method="post">
+        <input type="date" class="form-control mb-2" name="absence_date" required>
+        <button class="btn btn-primary w-100">Tarih Ekle</button>
+      </form>
+    </div></div>
+  </div>
+  <div class="col-md-8">
+    <ul class="list-group">
+      {% for absence in driver.absences %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ absence.absence_date }}
+        <form method="post" action="{{ url_for('main.driver_absence_delete', absence_id=absence.id) }}">
+          <button class="btn btn-sm btn-danger">Sil</button>
+        </form>
+      </li>
+      {% else %}
+      <li class="list-group-item">Kayıt yok.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

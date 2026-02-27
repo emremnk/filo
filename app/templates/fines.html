@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Trafik Cezaları</h2>
+<div class="card shadow-sm mb-4"><div class="card-body">
+  <form method="post" class="row g-2">
+    <div class="col-md-3"><select class="form-select" name="vehicle_id" required>
+      <option value="">Araç plakası seçin</option>
+      {% for v in vehicles %}<option value="{{ v.id }}">{{ v.plate }}</option>{% endfor %}
+    </select></div>
+    <div class="col-md-3"><input type="date" class="form-control" name="payment_date" required></div>
+    <div class="col-md-3"><input class="form-control" name="description" placeholder="Açıklama"></div>
+    <div class="col-md-2 form-check pt-2"><input type="checkbox" class="form-check-input" name="deducted_from_salary" id="deducted"><label class="form-check-label" for="deducted">Maaştan kesildi</label></div>
+    <div class="col-md-1"><button class="btn btn-primary w-100">Ekle</button></div>
+  </form>
+</div></div>
+<table class="table table-striped">
+  <thead><tr><th>Tarih</th><th>Plaka</th><th>Maaştan Kesildi</th><th>Açıklama</th><th></th></tr></thead>
+  <tbody>
+    {% for fine in fines %}
+    <tr><td>{{ fine.payment_date }}</td><td>{{ fine.vehicle.plate }}</td><td>{{ 'Evet' if fine.deducted_from_salary else 'Hayır' }}</td><td>{{ fine.description }}</td>
+      <td><form method="post" action="{{ url_for('main.fine_delete', fine_id=fine.id) }}"><button class="btn btn-sm btn-danger">Sil</button></form></td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-4">Ana Dashboard</h1>
+<div class="row g-3 mb-4">
+  {% for key, val in stats.items() %}
+  <div class="col-6 col-md-4 col-lg-2">
+    <div class="card shadow-sm h-100">
+      <div class="card-body text-center">
+        <h6 class="text-muted text-uppercase">{{ key }}</h6>
+        <div class="display-6">{{ val }}</div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="card shadow-sm">
+  <div class="card-header">Yaklaşan / Geciken Görevler</div>
+  <div class="card-body">
+    <ul class="list-group">
+      {% for item in today_items %}
+      <li class="list-group-item list-group-item-{{ item.status }}">{{ item.date }} - {{ item.title }}</li>
+      {% else %}
+      <li class="list-group-item">Kayıt yok.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

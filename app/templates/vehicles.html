@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-header">Araç Ekle</div>
+      <div class="card-body">
+        <form method="post">
+          <input class="form-control mb-2" name="plate" placeholder="Plaka" required>
+          <label>Vize</label><input type="date" class="form-control mb-2" name="inspection_date">
+          <label>Sigorta</label><input type="date" class="form-control mb-2" name="insurance_date">
+          <label>Muayene</label><input type="date" class="form-control mb-2" name="exam_date">
+          <button class="btn btn-primary w-100">Kaydet</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-header">Araç Listesi</div>
+      <div class="list-group list-group-flush">
+        {% for vehicle in vehicles %}
+        <a class="list-group-item list-group-item-action" href="{{ url_for('main.vehicle_detail', vehicle_id=vehicle.id) }}">{{ vehicle.plate }}</a>
+        {% else %}
+        <div class="list-group-item">Araç bulunamadı.</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

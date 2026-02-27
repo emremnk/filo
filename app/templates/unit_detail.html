@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ unit.name }} Detayı</h2>
+<div class="card shadow-sm"><div class="card-body">
+  <form method="post" action="{{ url_for('main.unit_update', unit_id=unit.id) }}">
+    <input class="form-control mb-2" name="name" value="{{ unit.name }}" required>
+    <label>Sözleşme başlangıç</label><input type="date" class="form-control mb-2" name="contract_start" value="{{ unit.contract_start or '' }}">
+    <label>Sözleşme bitiş</label><input type="date" class="form-control mb-2" name="contract_end" value="{{ unit.contract_end or '' }}">
+    <label>Fatura kesim tarihi</label><input type="date" class="form-control mb-2" name="invoice_date" value="{{ unit.invoice_date or '' }}">
+    <button class="btn btn-success">Güncelle</button>
+  </form>
+  <form method="post" action="{{ url_for('main.unit_delete', unit_id=unit.id) }}" class="mt-2">
+    <button class="btn btn-danger">Sil</button>
+  </form>
+</div></div>
+{% endblock %}

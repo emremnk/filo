@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ driver.name }} Detayı</h2>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <form method="post" action="{{ url_for('main.driver_update', driver_id=driver.id) }}">
+      <input class="form-control mb-2" name="name" value="{{ driver.name }}" required>
+      <input class="form-control mb-2" name="identity_no" value="{{ driver.identity_no or '' }}" placeholder="Kimlik no">
+      <input class="form-control mb-2" name="phone" value="{{ driver.phone or '' }}" placeholder="Telefon">
+      <input class="form-control mb-2" name="license_info" value="{{ driver.license_info or '' }}" placeholder="Ehliyet bilgisi">
+      <label>Ehliyet bitiş tarihi</label><input type="date" class="form-control mb-2" name="license_expiry" value="{{ driver.license_expiry or '' }}">
+      <button class="btn btn-success">Güncelle</button>
+      <a class="btn btn-outline-primary" href="{{ url_for('main.driver_absences', driver_id=driver.id) }}">Gelmediği Günler</a>
+    </form>
+    <form method="post" action="{{ url_for('main.driver_delete', driver_id=driver.id) }}" class="mt-2">
+      <button class="btn btn-danger">Sil</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
